@@ -1,5 +1,5 @@
 # Weather Discord Bot ☁️
-This is a Weather bot for Discord
+This is a Weather bot for Discord that displays temperature in °F/°C, wind conditions and time 
 
 
 ## Install Directly on a local computer
