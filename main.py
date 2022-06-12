@@ -43,7 +43,7 @@ def get_weather(city):
 @client.event
 async def on_message(message):
     if message.content.lower().startswith("!w"):
-            city = message.content[slice(9, len(message.content))].lower()
+            city = message.content[slice(11, len(message.content))].lower()
             result = get_weather(city)
             await message.channel.send(embed=result)
 
