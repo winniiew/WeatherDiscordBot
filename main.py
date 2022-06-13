@@ -2,22 +2,23 @@ import requests, json
 import discord
 from keep_alive import keep_alive
 
-token = "TOKEN"
+token = "OTg0MDM1MTUyMjgxODYyMTQ1.GbmtuG.zP8a3E3Da3RNUHhG3kRMUGgFXNGz8ZNuTj1IlY"
 client = discord.Client()
 
 @client.event
 async def on_ready():
-  await       client.change_presence(activity=discord.Game('Weather Forecast ☁️')) 
+  await       client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="rain 🌧️")) 
 
 
 def get_weather(city):
     try:
-        base_url = "http://api.weatherapi.com/v1/current.json?key=WEATHERAPI_KEY"
+        base_url = "http://api.weatherapi.com/v1/current.json?key=0176115ef91d43878fc101304220806"
         complete_url = base_url + "&q=" + city
         response =  requests.get(complete_url) 
         result = response.json()
 
         city = result['location']['name']
+        state = result['location']['region']
         country = result['location']['country']
         time = result['location']['localtime']
         wcond = result['current']['condition']['text']
@@ -26,12 +27,12 @@ def get_weather(city):
         fclike = result['current']['feelslike_c']
         fflike = result['current']['feelslike_f']
 
-        embed=discord.Embed(title=f"{city}"'Weather', description=f"{country}", color=0x14aaeb)
-        embed.add_field(name="Temprature C° 🌡️", value=f"{celcius}", inline=True)
-        embed.add_field(name="Temprature F° 🌡️", value=f"{fahrenheit}", inline=True)
+        embed=discord.Embed(title=f"{city}" ' Weather', description=f"{state}, {country}", color=0x14aaeb)
+        embed.add_field(name="Temprature °C 🌡️", value=f"{celcius}", inline=True)
+        embed.add_field(name="Temprature °F 🌡️", value=f"{fahrenheit}", inline=True)
         embed.add_field(name="Wind Condition 🌬️", value=f"{wcond}", inline=False)
-        embed.add_field(name="Feels Like F°", value=f"{fflike}", inline=True)
-        embed.add_field(name="Feels Like C°", value=f"{fclike}", inline=True)
+        embed.add_field(name="Feels Like °F", value=f"{fflike}", inline=True)
+        embed.add_field(name="Feels Like °C", value=f"{fclike}", inline=True)
         embed.set_footer(text='Time 🕧: 'f"{time}")
 
         return embed
@@ -43,11 +44,13 @@ def get_weather(city):
 @client.event
 async def on_message(message):
     if message.content.lower().startswith("!w"):
-            city = message.content[slice(11, len(message.content))].lower()
+            city = message.content[slice(2, len(message.content))].lower()
             result = get_weather(city)
             await message.channel.send(embed=result)
+            
 
 print("Bot has started running")
 
+
 keep_alive()
-client.run(token)
+client.run(token) 
