@@ -2,7 +2,7 @@ import requests, json
 import discord
 from keep_alive import keep_alive
 
-token = "OTg0MDM1MTUyMjgxODYyMTQ1.GbmtuG.zP8a3E3Da3RNUHhG3kRMUGgFXNGz8ZNuTj1IlY"
+token = "TOKEN"
 client = discord.Client()
 
 @client.event
@@ -12,7 +12,7 @@ async def on_ready():
 
 def get_weather(city):
     try:
-        base_url = "http://api.weatherapi.com/v1/current.json?key=0176115ef91d43878fc101304220806"
+        base_url = "http://api.weatherapi.com/v1/current.json?key={WEATHERAPI_KEY}"
         complete_url = base_url + "&q=" + city
         response =  requests.get(complete_url) 
         result = response.json()
