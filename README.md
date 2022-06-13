@@ -49,4 +49,4 @@ https://discord.com/api/oauth2/authorize?client_id=984035152281862145&permission
  
 **Example**
   
-`!w America, San Francisco`
+`!w Portland, Maine`
